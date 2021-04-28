@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, View, Text, Alert } from "react-native";
+import { FlatList, View, Alert } from "react-native";
 import { ListItem, Avatar, Icon, Button } from "react-native-elements";
 import users from "../data/users";
 
