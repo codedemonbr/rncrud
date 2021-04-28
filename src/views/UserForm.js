@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { TextInput, View, Text, StyleSheet, Button } from "react-native";
+import UsersContext from "../context/UsersContext";
 
 export default ({ route, navigation }) => {
     const [user, setUser] = useState(route.params ? route.params : {});
+
+    const { dispatch } = useContext(UsersContext);
+
     return (
         <View style={style.form}>
             <Text>Nome</Text>
@@ -26,7 +31,16 @@ export default ({ route, navigation }) => {
                 placeholder="Informe a url do Avatar"
                 value={user.avatarUrl}
             />
-            <Button title="Salvar" onPress={() => navigation.goBack()} />
+            <Button
+                title="Salvar"
+                onPress={() => {
+                    dispatch({
+                        type: user.id ? "updateUser" : "createUser",
+                        payload: user,
+                    });
+                    navigation.goBack();
+                }}
+            />
         </View>
     );
 };
